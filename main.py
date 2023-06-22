@@ -24,7 +24,7 @@ class PageDeleter(AddOn):
             for page in range(1,document.pages):
                 print(f"{page}")
                 if document.get_page_text(page).isspace() or document.get_page_text(page)=="":
-                    file_handle.delete_page(page)
+                    file_handle.delete_page(page-1)
                     print(f"Deleted page{page}")
             file_handle.save(output_file)
         self.client.documents.upload_directory("./out/")
