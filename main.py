@@ -18,7 +18,7 @@ class PageDeleter(AddOn):
             title = document.title
             with open(f"{title}.pdf", "wb") as file:
                 file.write(document.pdf)
-            input_file = f"{document.title}.pdf
+            input_file = f"{document.title}.pdf"
             output_file = f"./out/{document.title}-clean.pdf"
             file_handle = fitz.open(input_file)
             for page in range(0,document.pages-1):
