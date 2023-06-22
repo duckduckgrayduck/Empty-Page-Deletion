@@ -3,12 +3,7 @@ description: This Add-On detects pages with no text in a document and gives you 
 type: object
 documents:
   - selected
-properties:
-  delete:
-    title: Do you want to delete the empty pages?
-    type: boolean
-required:
-  - delete 
+properties: {}
 categories: 
   - file
 # Acceptable categories are premium, ai, export, bulk, file,  monitor, statistical, and extraction. 
