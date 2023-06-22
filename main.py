@@ -12,7 +12,6 @@ class PageDeleter(AddOn):
     """DocumentCloud Add-On that detects empty pages and deletes them."""
 
     def main(self):
-        delete = self.data.get("delete")
         os.makedirs(os.path.dirname("./out/"), exist_ok=True)
         to_include=[]
         for document in self.get_documents():
