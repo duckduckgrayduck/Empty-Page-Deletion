@@ -26,7 +26,7 @@ class PageDeleter(AddOn):
                 if document.get_page_text(page).isspace() or document.get_page_text(page)=="":
                    pass
                 else:
-                    print(f"{page-1}")
+                    print(f"{page}")
                     to_include.append(page-1)
             file_handle.select(to_include)
             file_handle.save(output_file)
