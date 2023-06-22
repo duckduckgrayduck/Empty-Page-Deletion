@@ -22,8 +22,10 @@ class PageDeleter(AddOn):
             output_file = f"./out/{document.title}-clean.pdf"
             file_handle = fitz.open(input_file)
             for page in range(1,document.pages):
-                if document.get_page_text(page).isspace():
+                print(f"{page}")
+                if document.get_page_text(page).isspace() or document.get_page_text(page)=="":
                     file_handle.delete_page(page)
+                    print(f"Deleted page{page}")
             file_handle.save(output_file)
         self.client.documents.upload_directory("./out/")
 
