@@ -14,6 +14,7 @@ class PageDeleter(AddOn):
     def main(self):
         delete = self.data.get("delete")
         os.makedirs(os.path.dirname("./out/"), exist_ok=True)
+        to_include=[]
         for document in self.get_documents():
             title = document.title
             with open(f"{title}.pdf", "wb") as file:
@@ -23,7 +24,6 @@ class PageDeleter(AddOn):
             file_handle = fitz.open(input_file)
             for page in range(1,document.pages+1):
                 print(f"{page}")
-                to_include =[] 
                 if document.get_page_text(page).isspace() or document.get_page_text(page)=="":
                    pass
                 else: 
