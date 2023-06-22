@@ -21,7 +21,7 @@ class PageDeleter(AddOn):
             input_file = f"{document.title}.pdf"
             output_file = f"./out/{document.title}-clean.pdf"
             file_handle = fitz.open(input_file)
-            for page in range(1,document.pages):
+            for page in range(1,document.pages+1):
                 print(f"{page}")
                 if document.get_page_text(page).isspace() or document.get_page_text(page)=="":
                     file_handle.delete_page(page-1)
