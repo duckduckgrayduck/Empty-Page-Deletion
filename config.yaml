@@ -1,5 +1,5 @@
 title: Empty Page Deleter
-description: This Add-On detects pages with no text in a document and gives you the option of deleting them/
+description: This Add-On detects pages with no text in a document, deletes the pages, and re-uploads the document with those pages removed. 
 type: object
 documents:
   - selected
