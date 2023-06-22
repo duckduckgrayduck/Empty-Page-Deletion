@@ -23,7 +23,7 @@ class PageDeleter(AddOn):
             output_file = f"./out/{document.title}-clean.pdf"
             file_handle = fitz.open(input_file)
             for page in range(1,document.pages+1):
-                if document.get_page_text(page).isspace() or document.get_page_text(page)=="":
+                if document.get_page_text(page).isspace() or document.get_page_text(page)=="" or document.get_page_text(page).rstrip()=='.':
                    print(f"{page}")
                 else:
                     to_include.append(page-1)
