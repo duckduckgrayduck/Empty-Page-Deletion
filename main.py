@@ -5,7 +5,7 @@ the empty pages will be deleted.
 """
 
 from documentcloud.addon import AddOn
-import fritz 
+import fitz 
 import os
 
 class PageDeleter(AddOn):
