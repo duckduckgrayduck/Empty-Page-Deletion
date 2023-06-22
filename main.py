@@ -24,9 +24,8 @@ class PageDeleter(AddOn):
             file_handle = fitz.open(input_file)
             for page in range(1,document.pages+1):
                 if document.get_page_text(page).isspace() or document.get_page_text(page)=="":
-                   pass
+                   print(f"{page}")
                 else:
-                    print(f"{page}")
                     to_include.append(page-1)
             file_handle.select(to_include)
             file_handle.save(output_file)
