@@ -1,38 +1,31 @@
 """
-This is a hello world add-on for DocumentCloud.
-
-It demonstrates how to write a add-on which can be activated from the
-DocumentCloud add-on system and run using Github Actions.  It receives data
-from DocumentCloud via the request dispatch and writes data back to
-DocumentCloud using the standard API
+This DocumentCloud Add-On searches through each page in a document 
+and if that page does not have underlying text, and the user has selected to delete it, 
+the empty pages will be deleted. 
 """
 
 from documentcloud.addon import AddOn
+import fritz 
+import os
 
-
-class HelloWorld(AddOn):
-    """An example Add-On for DocumentCloud."""
+class PageDeleter(AddOn):
+    """DocumentCloud Add-On that detects empty pages and deletes them."""
 
     def main(self):
-        """The main add-on functionality goes here."""
-        # fetch your add-on specific data
-        name = self.data.get("name", "world")
-
-        self.set_message("Hello World start!")
-
-        # add a hello note to the first page of each selected document
+        delete = self.data.get("delete")
+        os.makedirs(os.path.dirname("./out/"), exist_ok=True)
         for document in self.get_documents():
-            # get_documents will iterate through all documents efficiently,
-            # either selected or by query, dependeing on which is passed in
-            document.annotations.create(f"Hello {name}!", 0)
-
-        with open("hello.txt", "w+") as file_:
-            file_.write("Hello world!")
-            self.upload_file(file_)
-
-        self.set_message("Hello World end!")
-        self.send_mail("Hello World!", "We finished!")
-
+            title = document.title
+            with open(f"{title}.pdf", "wb") as file:
+                file.write(document.pdf)
+            input_file = f"{document.title}.pdf
+            output_file = f"./out/{document.title}-clean.pdf"
+            file_handle = fitz.open(input_file)
+            for page in range(0,document.pages-1):
+                if document.get_page_text(page)="":
+                    file_handle.delete_page(page)
+            file_handle.save(output_file)
+        self.client.documents.upload_directory("./out/")
 
 if __name__ == "__main__":
-    HelloWorld().main()
+    PageDeleter().main()
