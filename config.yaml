@@ -4,7 +4,14 @@ type: object
 documents:
   - selected
   - query
-properties: {}
+properties: 
+  project_id:
+     title: Project ID of the project you would like the documents uploaded to (optional)
+     type: integer
+  access_level:
+     title: Access level for uploaded documents (public, private(default), organization)
+     type: string
+     default: private
 categories: 
   - file
 # Acceptable categories are premium, ai, export, bulk, file,  monitor, statistical, and extraction. 
