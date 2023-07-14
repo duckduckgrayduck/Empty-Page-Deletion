@@ -14,6 +14,8 @@ class PageDeleter(AddOn):
     def main(self):
         os.makedirs(os.path.dirname("./out/"), exist_ok=True)
         to_include=[]
+        access_level = self.data["access_level"]
+        project_id = self.data.get("project_id")
         for document in self.get_documents():
             title = document.title
             with open(f"{title}.pdf", "wb") as file:
@@ -28,7 +30,10 @@ class PageDeleter(AddOn):
                     to_include.append(page-1)
             file_handle.select(to_include)
             file_handle.save(output_file)
-        self.client.documents.upload_directory("./out/")
+        obj_list = self.client.documents.upload_directory("./out/")
+        project = self.client.projects.get(project_id)
+        project.document_list = obj_list
+        project.put()
 
 if __name__ == "__main__":
     PageDeleter().main()
