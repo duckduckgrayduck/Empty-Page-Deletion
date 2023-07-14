@@ -14,7 +14,6 @@ class PageDeleter(AddOn):
     def main(self):
         os.makedirs(os.path.dirname("./out/"), exist_ok=True)
         to_include=[]
-        access_level = self.data["access_level"]
         project_id = self.data.get("project_id")
         for document in self.get_documents():
             title = document.title
