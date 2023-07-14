@@ -3,6 +3,7 @@ description: This Add-On detects pages with no text in a document, deletes the p
 type: object
 documents:
   - selected
+  - query
 properties: {}
 categories: 
   - file
