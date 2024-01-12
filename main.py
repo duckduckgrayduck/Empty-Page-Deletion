@@ -28,8 +28,13 @@ class PageDeleter(AddOn):
                    print(f"{page}")
                 else:
                     to_include.append(page-1)
-            to_include.reverse()
-            file_handle.select(to_include)
+            print(to_include)
+            try:
+                file_handle.select(to_include)
+            except ValueError as v:
+                print("ERROR")
+                print(v)
+                print(to_in
             file_handle.save(output_file)
         self.client.documents.upload_directory("./out/", project=project_id)
 
