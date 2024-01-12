@@ -34,7 +34,6 @@ class PageDeleter(AddOn):
             except ValueError as v:
                 print("ERROR")
                 print(v)
-                print(to_in
             file_handle.save(output_file)
         self.client.documents.upload_directory("./out/", project=project_id)
 
