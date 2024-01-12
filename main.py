@@ -13,9 +13,9 @@ class PageDeleter(AddOn):
 
     def main(self):
         os.makedirs(os.path.dirname("./out/"), exist_ok=True)
-        to_include=[]
         project_id = self.data.get("project_id")
         for document in self.get_documents():
+            to_include=[]
             print(f"Document:{document.id}")
             title = document.title
             with open(f"{title}.pdf", "wb") as file:
