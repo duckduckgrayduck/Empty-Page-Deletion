@@ -16,6 +16,7 @@ class PageDeleter(AddOn):
         to_include=[]
         project_id = self.data.get("project_id")
         for document in self.get_documents():
+            print(f"Document:{document.id}")
             title = document.title
             with open(f"{title}.pdf", "wb") as file:
                 file.write(document.pdf)
