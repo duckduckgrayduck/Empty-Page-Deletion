@@ -13,23 +13,34 @@ class PageDeleter(AddOn):
 
     def main(self):
         os.makedirs(os.path.dirname("./out/"), exist_ok=True)
-        to_include=[]
         project_id = self.data.get("project_id")
+        
         for document in self.get_documents():
             title = document.title
             with open(f"{title}.pdf", "wb") as file:
                 file.write(document.pdf)
+            
             input_file = f"{document.title}.pdf"
             output_file = f"./out/{document.title}-clean.pdf"
+            
             file_handle = fitz.open(input_file)
-            for page in range(1,document.pages+1):
-                if document.get_page_text(page).isspace() or document.get_page_text(page)=="" or document.get_page_text(page).rstrip()=='.':
-                   print(f"{page}")
+            
+            to_include = []  
+            
+            for page in range(document.pages):
+                if document.get_page_text(page).isspace() or document.get_page_text(page) == "" or document.get_page_text(page).rstrip() == '.':
+                    print(f"Empty page detected: {page + 1}")  
                 else:
-                    to_include.append(page-1)
+                    to_include.append(page)  
+            
+            # Select pages to include based on the to_include list
             file_handle.select(to_include)
+            
+            # Save the modified PDF with only the selected pages
             file_handle.save(output_file)
-        self.client.documents.upload_directory("./out/", project=project.id)
+            
+        # Upload the modified PDFs to DocumentCloud
+        self.client.documents.upload_directory("./out/", project=project_id)
 
 if __name__ == "__main__":
     PageDeleter().main()
