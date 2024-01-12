@@ -28,6 +28,7 @@ class PageDeleter(AddOn):
                    print(f"{page}")
                 else:
                     to_include.append(page-1)
+            to_include.reverse()
             file_handle.select(to_include)
             file_handle.save(output_file)
         self.client.documents.upload_directory("./out/", project=project_id)
