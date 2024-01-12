@@ -29,7 +29,7 @@ class PageDeleter(AddOn):
                     to_include.append(page-1)
             file_handle.select(to_include)
             file_handle.save(output_file)
-        self.client.documents.upload_directory("./out/", project=project.id)
+        self.client.documents.upload_directory("./out/", project=project_id)
 
 if __name__ == "__main__":
     PageDeleter().main()
