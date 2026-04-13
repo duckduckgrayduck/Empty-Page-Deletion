@@ -12,6 +12,7 @@ class PageDeleter(AddOn):
     """DocumentCloud Add-On that detects empty pages and deletes them."""
 
     def main(self):
+        self.client.session.headers.update({'User-Agent': 'Empty Page Deleter Add-On'})
         os.makedirs(os.path.dirname("./out/"), exist_ok=True)
         project_id = self.data.get("project_id")
         for document in self.get_documents():
